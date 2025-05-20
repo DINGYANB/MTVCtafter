@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MTVCrafter is a method for animating human images using 4D motion tokenization. It supports general and natural image animation from sparse inputs.">
+  <meta name="keywords" content="MTVCrafter, 4D Motion, Human Animation, Image Animation, Tokenization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MTVCrafter: 4D Motion Tokenization for Open-World Human Image Animation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MTVCrafter: 4D Motion Tokenization for Open-World Human Image Animation</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Human image animation has gained increasing attention and developed rapidly due to its broad applications in digital humans. However, existing methods entirely rely on 2D-rendered pose images for motion guidance, which limits generalization and discards essential 3D information for open-world animation. To tackle this problem, we propose MTVCrafter (Motion Tokenization Video Crafter), the first framework that directly models raw 3D motion sequences for human image animation. Specifically, we introduce 4DMoT (4D motion tokenizer) to quantize 3D motion sequences into 4D motion tokens. Compared to 2D-rendered pose images, 4D motion tokens offer more faithful spatio-temporal cues and avoid strict pixel-level alignment between pose image and character, enabling more flexible and disentangled control. Then, we introduce MV-DiT (Motion-aware Video DiT). By designing unique motion attention with 4D positional encodings, MV-DiT can effectively leverage motion tokens as 4D compact yet expressive context for human image animation in the complex 3D world. Hence, it marks a significant step forward in this field and opens a new direction for pose-guided human video generation. Experiments show that our MTVCrafter achieves state-of-the-art results with an FID-VID of 6.98, surpassing the second-best by 65%. Powered by robust motion tokens, MTVCrafter also generalizes well to diverse open-world characters (single/multiple, full/half-body) across various styles and scenarios. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper Motivation. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="box" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <img src="./static/images/Motivation.png" alt="PNG Image" style="width: 100%; height: auto; border-radius: 8px;">
+          <p style="margin-top: 1em; font-size: 1rem; text-align: left;">
+            Our motivation is that directly tokenizing 4D motion captures more faithful and expressive information than traditional 2D-rendered pose images derived from the driven video.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="box" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <p style="margin-top: 1em; margin-bottom: 1em; font-size: 1rem; text-align: left;">
+            Our MTVCrafter comprises a <strong>4D motion tokenizer (4DMoT)</strong> and a <strong>motion-aware video diffusion transformer (MV-DiT)</strong>.
+            The 4DMoT encodes raw 4D motion into compact and expressive motion tokens,
+            while the MV-DiT integrates these tokens into a powerful video DiT backbone via 4D motion attention and 4D positional encodings.
+          </p>
+          <!-- First block -->
+          <div style="margin-bottom: 20px;">
+            <img src="./static/images/4DMoT.png" alt="Method 1" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 1em; font-size: 1rem; text-align: left;">
+              (1)
+              Our 4D motion tokenizer consists of an encoder-decoder framework to learn spatio-temporal latent representations of SMPL motion sequences,
+              and a vector quantizer to learn discrete tokens in a unified space.
+              All operations are performed in 2D space along frame and joint axes.
+            </p>
+          </div>
+    
+          <!-- Second block -->
+          <div style="margin-bottom: 20px;">
+            <img src="./static/images/MV-DiT.png" alt="Method 2" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 1em; font-size: 1rem; text-align: left;">
+              (2)
+              Based on video DiT architecture,
+              we design a 4D motion attention module to combine motion tokens with vision tokens.
+              Since the patchify disrupted positional information,
+              we introduce 4D RoPE to recover the spatio-temporal relationships.
+              To further improve the quality of generation and generalization,
+              we use learnable unconditional tokens for motion classifier-free guidance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Paper Animation. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Animation</h2>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/luffy.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/monalisa.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/siren.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/tanjianci.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/xiangsu.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/daji.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/spider.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/jibuli.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/niuzai.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/human.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/dijia.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="box">
+          <video class="video is-fullwidth" autoplay loop muted playsinline>
+            <source src="./static/videos/iron-man.mp4" type="video/mp4">
+          </video>
+        </div>
+    
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+</body>
+</html>
